@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Bikes from "./pages/Bikes";
 import Bookings from "./pages/Bookings";
 import Footer from "./components/Footer";
-import Bikedetails from "./pages/bikeDetails";
+import Bikedetails from "./pages/BikeDetails";
 import Layout from "./pages/Admin/Layout";
 import Admin from "./pages/Admin/Admin";
 import Addbike from "./pages/Admin/Addbike";
