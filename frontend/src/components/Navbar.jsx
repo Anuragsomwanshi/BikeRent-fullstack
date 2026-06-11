@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav
       className={`relative w-[95%] mx-auto mt-5 rounded-full px-4 py-3 flex items-center justify-between ${
-        location.pathname === "/" ? "bg-blue-700" : "bg-white"
+        location.pathname === "/" ? "bg-white " : "bg-blue-200"
       } shadow-md`}
     >
       {/* Logo */}
@@ -47,14 +47,14 @@ const Navbar = () => {
       </Link>
 
       {/* Desktop Menu */}
-      <div className="hidden lg:flex items-center gap-8">
+      <div className="hidden lg:flex items-center gap-8 ">
         {menuLinks.map((link, index) => (
           <Link
             key={index}
             to={link.path}
             className={`font-medium hover:text-orange-500 transition ${
               location.pathname === "/"
-                ? "text-white"
+                ? "text-black"
                 : "text-gray-800"
             }`}
           >

@@ -34,7 +34,7 @@ const Head = () => {
        className="w-full max-w-md md:max-w-6xl mx-auto bg-white rounded-2xl md:rounded-full shadow-lg p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6"
       >
         {/* Form Fields */}
-        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full">
+        <div className="flex flex-col  md:flex-row items-center gap-6 md:gap-10 w-full">
 
           {/* Pickup Location */}
           <div className="flex flex-col items-start w-full md:w-auto">
