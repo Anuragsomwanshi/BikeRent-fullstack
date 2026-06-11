@@ -1,47 +1,72 @@
-import React from 'react'
-import { assets } from '../assets/assets';
+import React from "react";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
+  const linkSections = [
+    {
+      title: "Quick Links",
+      links: ["Home", "Bikes", "My Bookings"],
+    },
+    {
+      title: "Follow Us",
+      links: ["Instagram", "Twitter", "Facebook", "YouTube"],
+    },
+  ];
 
-
-    const linkSections = [
-        {
-            title: "Quick Links",
-            links: ["Home", "Bikes", "MyBookings" ]
-        },
-       
-        {
-            title: "Follow Us",
-            links: ["Instagram", "Twitter", "Facebook", "YouTube"]
-        }
-    ];
   return (
-     <div className="px-6 md:px-16 lg:px-24 xl:px-32">
-            <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-400/30 text-gray-300">
-                <div>
-                    <img className="w-34 md:w-32 rounded-full" src={assets.icon} alt="" />
-                    <p className=" mt-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum unde quaerat eveniet cumque accusamus atque qui error quo enim fugiat?</p>
-                </div>
-                <div className="flex flex-wrap justify-around w-full md:w-[45%] gap-5">
-                    {linkSections.map((section, index) => (
-                        <div key={index}>
-                            <h3 className="font-semibold text-base text-gray-900 md:mb-5 mb-2">{section.title}</h3>
-                            <ul className="text-sm space-y-1">
-                                {section.links.map((link, i) => (
-                                    <li key={i}>
-                                        <a href="#" className="hover:underline transition">{link}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <p className="py-4 text-center text-sm md:text-base text-white-300/80">
-                Copyright 2025 ©  All Right Reserved.
-            </p>
-        </div>
-  )
-}
+    <footer className="w-full bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24">
+        {/* Top Section */}
+        <div className="flex flex-col lg:flex-row justify-between gap-10 py-10 border-b border-gray-700">
+          {/* Logo & Description */}
+          <div className="w-full lg:w-2/5">
+            <img
+              src={assets.icon}
+              alt="Logo"
+              className="w-24 sm:w-28 md:w-32 rounded-full"
+            />
 
-export default Footer
+            <p className="mt-5 text-sm sm:text-base text-gray-300 leading-7">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Rerum unde quaerat eveniet cumque accusamus atque qui error
+              quo enim fugiat.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 w-full lg:w-auto">
+            {linkSections.map((section, index) => (
+              <div key={index}>
+                <h3 className="text-base sm:text-lg font-semibold mb-3 text-white">
+                  {section.title}
+                </h3>
+
+                <ul className="space-y-2">
+                  {section.links.map((link, i) => (
+                    <li key={i}>
+                      <a
+                        href="#"
+                        className="text-sm sm:text-base text-gray-300 hover:text-orange-400 transition-colors duration-300"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="py-5 text-center">
+          <p className="text-xs sm:text-sm md:text-base text-gray-400">
+            © 2025 BikeRent. All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

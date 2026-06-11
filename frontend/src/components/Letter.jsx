@@ -1,24 +1,35 @@
-import React from 'react'
-import Title from './Title'
+import React from "react";
+import Title from "./Title";
 
 const Letter = () => {
   return (
-    <div className="flex flex-col items-center justify-center text-center space-y-5 max-md:px-4 my-10 mb-40">
-            <Title title = "Never miss this deal" subTitle="Subscribe to get the latest offers, new arrivals, and exclusive discounts" />
-        
-            <form className="flex items-center justify-between max-w-2xl w-full md:h-13 h-12">
-                <input
-                    className="border border-gray-300 rounded-md h-full border-r-0 outline-none w-full rounded-r-none px-3 text-gray-200"
-                    type="text"
-                    placeholder="Enter your email id"
-                    required
-                />
-                <button type="submit" className="md:px-12 px-8 h-full text-black bg-orange-200 hover:bg-orange-400 transition-all cursor-pointer rounded-md rounded-l-none">
-                    Subscribe to this email
-                </button>
-            </form>
-        </div>
-  )
-}
+    <section className="w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 py-12 sm:py-16 mb-20 md:mb-32">
+      {/* Section Title */}
+      <Title
+        title="Never Miss This Deal"
+        subTitle="Subscribe to get the latest offers, new arrivals, and exclusive discounts"
+      />
 
-export default Letter
+      {/* Newsletter Form */}
+      <form className="w-full max-w-3xl mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
+        {/* Email Input */}
+        <input
+          type="email"
+          placeholder="Enter your email"
+          required
+          className="w-full h-12 sm:h-14 px-4 border border-gray-300 rounded-lg sm:rounded-r-none outline-none focus:border-orange-400 text-gray-700 placeholder:text-gray-400"
+        />
+
+        {/* Subscribe Button */}
+        <button
+          type="submit"
+          className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 md:px-10 bg-orange-300 hover:bg-orange-500 text-black font-medium rounded-lg sm:rounded-l-none transition-all duration-300 cursor-pointer"
+        >
+          Subscribe
+        </button>
+      </form>
+    </section>
+  );
+};
+
+export default Letter;
