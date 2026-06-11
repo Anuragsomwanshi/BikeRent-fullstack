@@ -117,7 +117,7 @@ const Head = () => {
   <img
     src={assets.karizma}
     alt="Karizma Bike"
-    className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl h-auto object-contain"
+    className="w-full max-w-xs rounded-full sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl h-auto object-contain"
   />
 </div>
     </div>
