@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { assets, cityName } from "../assets/assets";
 import { useAppContext } from "../Context/Appcontext";
@@ -15,36 +14,65 @@ const Head = () => {
   } = useAppContext();
 
   const handleSearch = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    
-  };
+  if (!location) {
+    return toast.error("Please select a pickup location");
+  }
+
+  if (!pickupDate) {
+    return toast.error("Please select a pickup date");
+  }
+
+  if (!returnDate) {
+    return toast.error("Please select a return date");
+  }
+
+  if (new Date(returnDate) < new Date(pickupDate)) {
+    return toast.error("Return date cannot be earlier than pickup date.");
+  }
+
+  navigate(
+    `/bikes?location=${encodeURIComponent(
+      location
+    )}&pickupDate=${pickupDate}&returnDate=${returnDate}`
+  );
+};
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-light px-4 py-10 gap-8">
+    <section className="min-h-screen bg-light flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
 
       {/* Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-        Bikes on Rent
-      </h1>
+      <div className="text-center mb-8 lg:mb-10">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
+          Bikes on Rent
+        </h1>
+
+        <p className="mt-3 text-sm sm:text-base text-black">
+          Book Your Perfect Ride
+        </p>
+      </div>
 
       {/* Search Form */}
       <form
         onSubmit={handleSearch}
-       className="w-full max-w-md md:max-w-6xl mx-auto bg-white rounded-2xl md:rounded-full shadow-lg p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6"
+        className="w-full max-w-xl bg-white rounded-2xl shadow-lg border border-gray-200 p-5 sm:p-6 lg:p-8"
       >
-        {/* Form Fields */}
-        <div className="flex flex-col  md:flex-row items-center gap-6 md:gap-10 w-full">
+        <div className="space-y-5">
 
           {/* Pickup Location */}
-          <div className="flex flex-col items-start w-full md:w-auto">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Pickup Location
+            </label>
+
             <select
               required
               value={location}
               onChange={(e) => Setlocation(e.target.value)}
-              className="w-full md:w-48 border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-orange-400"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-orange-400"
             >
-              <option value="">Pickup Location</option>
+              <option value="">Select Location</option>
 
               {cityName.map((city, index) => (
                 <option key={index} value={city}>
@@ -53,75 +81,76 @@ const Head = () => {
               ))}
             </select>
 
-            <p className="text-sm text-gray-400 mt-1">
-              {location ? location : "Choose location"}
+            <p className="text-xs sm:text-sm text-gray-400 mt-2">
+              {location || "Choose your pickup location"}
             </p>
           </div>
 
           {/* Pickup Date */}
-          <div className="flex flex-col items-start w-full md:w-auto">
+          <div>
             <label
               htmlFor="pickup-date"
-              className="text-sm font-medium mb-1"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Pick-up Date
+              Pickup Date
             </label>
 
             <input
-              value={pickupDate}
-              onChange={(e) => setPickupDate(e.target.value)}
-              type="date"
               id="pickup-date"
-              min={new Date().toISOString().split("T")[0]}
+              type="date"
               required
-              className="w-full md:w-44 border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-orange-400"
+              value={pickupDate}
+              min={new Date().toISOString().split("T")[0]}
+              onChange={(e) => setPickupDate(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-orange-400"
             />
           </div>
 
           {/* Return Date */}
-          <div className="flex flex-col items-start w-full md:w-auto">
+          <div>
             <label
               htmlFor="return-date"
-              className="text-sm font-medium mb-1"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Return Date
             </label>
 
             <input
+              id="return-date"
+              type="date"
+              required
               value={returnDate}
               onChange={(e) => setReturnDate(e.target.value)}
-              type="date"
-              id="return-date"
-              required
-              className="w-full md:w-44 border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-orange-400"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-orange-400"
             />
           </div>
-        </div>
 
-        {/* Search Button */}
-        <button
-          type="submit"
-          className="w-full md:w-auto flex items-center justify-center gap-2 bg-orange-300 hover:bg-orange-500 transition-all duration-300 text-black px-8 py-3 rounded-full cursor-pointer"
-        >
-          <img
-            src={assets.search}
-            alt="search"
-            className="h-5 w-5"
-          />
-          Search
-        </button>
+          {/* Search Button */}
+          <button
+            type="submit"
+            className="w-full bg-orange-400 hover:bg-orange-500 transition duration-300 text-black font-semibold py-3 rounded-full flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <img
+              src={assets.search}
+              alt="Search"
+              className="w-5 h-5"
+            />
+            Search Bikes
+          </button>
+        </div>
       </form>
 
       {/* Bike Image */}
-     <div className="flex justify-center w-full">
-  <img
-    src={assets.karizma}
-    alt="Karizma Bike"
-    className="w-full max-w-xs rounded-full sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl h-auto object-contain"
-  />
-</div>
-    </div>
+      <div className="w-full flex justify-center mt-10 sm:mt-12 lg:mt-16">
+        <img
+          src={assets.karizma}
+          alt="Karizma Bike"
+          className=" max-w-[160px] sm:max-w-xl rounded-full  object-contain"
+        />
+      </div>
+
+    </section>
   );
 };
 
-export default Head
+export default Head;

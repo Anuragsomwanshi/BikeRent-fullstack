@@ -15,33 +15,47 @@ const checkAvailabe = async (bike,pickupDate,returnDate)=>{
 
 
 //check avaliability
+export const checkAvailiblityofBike = async (req, res) => {
+  try {
+    const { location, pickupDate, returnDate } = req.body;
 
-export const  checkAvailiblityofBike = async (req,res)=>{
-    try {
-        
-        const {location,pickupDate,returnDate} = req.body;
-         const Bikes = await Bike.find({location,isAvaliable:true})
+    const bikes = await Bike.find({
+      location: { $regex: new RegExp(`^${location}$`, "i") },
+      isAvaliable: true,
+    });
 
+    const availableBikePromise = bikes.map(async (bike) => {
+      const isAvailable = await checkAvailabe(
+        bike._id,
+        pickupDate,
+        returnDate
+      );
 
-         const availablebikepromise = bikes.map(async(bike)=>{
-          const isAvailable =  await checkAvailabe(bike._id,pickupDate,returnDate)
+      return {
+        ...bike._doc,
+        isAvailable,
+      };
+    });
 
-          return {...bike._doc, isAvailable:isAvailable}
-         })
+    let availableBikes = await Promise.all(availableBikePromise);
 
-         let availableBike = await Promise.all(availablebikepromise)
-         availableBike = availableBike.filter(bike => bike.isAvailable === true)
+    availableBikes = availableBikes.filter(
+      (bike) => bike.isAvailable
+    );
 
-         res.json({success:true,availableBike})
-    } catch (error) {
-        console.log(error.message)
-        return res.json({success:false,message:error.message})
-        
-    }
+    res.json({
+      success: true,
+      availablebikes: availableBikes,
+    });
+  } catch (error) {
+    console.log(error);
 
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
 }
-
-
 
 //create booking
 

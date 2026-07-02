@@ -18,8 +18,8 @@ export const AppProvider = ({children})=>{
     const[showLogin,setShowLogin] = useState(false)
     const[pickupDate,setPickupDate] = useState('')
     const[returnDate,setReturnDate] = useState('')
-
     const [bikes,setBikes] = useState([])
+
 
 
     // function to check  userlogin or not

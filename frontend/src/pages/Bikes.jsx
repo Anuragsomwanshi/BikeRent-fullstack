@@ -37,36 +37,37 @@ const Bikes = () => {
     setFilterBikes(filtered);
   };
 
-  const searchBikeAvailability = async () => {
-    try {
-      const { data } = await axios.post(
-        "/api/bookings/check-availablity",
-        {
-          location,
-          pickupDate,
-          returnDate,
-        }
-      );
-
-      if (data.success) {
-        setFilterBikes(data.availablebikes);
-
-        if (data.availablebikes.length === 0) {
-          toast("No bikes available");
-        }
+ const searchBikeAvailability = async () => {
+  try {
+    const { data } = await axios.post(
+      "/api/bookings/check-availability",
+      {
+        location,
+        pickupDate,
+        returnDate,
       }
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to fetch bikes");
-    }
-  };
+    );
 
+    console.log("API Response:", data);
+
+    if (data.success) {
+      console.log("Available Bikes:", data.availablebikes);
+      setFilterBikes(data.availablebikes);
+
+      if (data.availablebikes.length === 0) {
+        toast("No bikes available");
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch bikes");
+  }
+};
   useEffect(() => {
-    if (isSearchData) {
-      searchBikeAvailability();
-    }
-  }, []);
-
+  if (isSearchData) {
+    searchBikeAvailability();
+  }
+}, [location, pickupDate, returnDate]);
   useEffect(() => {
     if (bikes.length > 0 && !isSearchData) {
       applyFilter();

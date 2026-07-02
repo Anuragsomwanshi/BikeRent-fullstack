@@ -15,15 +15,15 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between gap-10 py-10 border-b border-gray-700">
+        <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-16 py-10 border-b border-gray-700">
           {/* Logo & Description */}
-          <div className="w-full lg:w-2/5">
+          <div className="w-full lg:max-w-md">
             <img
               src={assets.icon}
-              alt="Logo"
-              className="w-24 sm:w-28 md:w-32 rounded-full"
+              alt="BikeRent Logo"
+              className="w-24 sm:w-28 rounded-full"
             />
 
             <p className="mt-5 text-sm sm:text-base text-gray-300 leading-7">
@@ -34,14 +34,14 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 w-full lg:w-auto">
+          <div className="grid grid-cols-2 gap-8 sm:gap-12">
             {linkSections.map((section, index) => (
               <div key={index}>
-                <h3 className="text-base sm:text-lg font-semibold mb-3 text-white">
+                <h3 className="mb-4 text-lg font-semibold">
                   {section.title}
                 </h3>
 
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {section.links.map((link, i) => (
                     <li key={i}>
                       <a
@@ -60,7 +60,7 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="py-5 text-center">
-          <p className="text-xs sm:text-sm md:text-base text-gray-400">
+          <p className="text-xs sm:text-sm text-gray-400">
             © 2025 BikeRent. All Rights Reserved.
           </p>
         </div>

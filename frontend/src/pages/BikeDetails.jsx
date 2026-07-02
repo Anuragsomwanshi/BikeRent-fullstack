@@ -17,7 +17,7 @@ const Bikedetails = () => {
     navigate
   } = useAppContext();
 
-  const [bike, setBike] = useState(null);
+  const [bike,setBike] = useState(null);
 
   const handleSubmit = async (e) => {
   e.preventDefault();
